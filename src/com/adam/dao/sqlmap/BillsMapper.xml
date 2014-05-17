@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.adam.dao.BillsDao">
+	
+	<select id="selectById" parameterType="int" resultMap="billsMap"  >
+	   select id,goods,tel,name,date,ordertime
+	   from bills
+	   where id = #{id}
+	</select>    
+	
+	<select id="selectBills"  parameterType="java.util.HashMap"   resultMap="billsMap"  >
+	   select id,goods,tel,name,date,ordertime
+	   from bills 
+		<where>
+		    <if test="bills.date != null and bills.date !=''">date = #{bills.date}</if>
+		    <if test="bills.orderid != null and bills.orderid != ''">and name like CONCAT('%','${bills.orderid}','%' )</if>
+		    <if test="bills.name != null and bills.name != ''">and name like CONCAT('%','${bills.name}','%' )</if>
+		    <if test="bills.tel != null and bills.tel != ''">and tel like CONCAT('%','${bills.name}','%' )</if>
+		    <if test="bills.goods != null and bills.goods != ''">and goods like CONCAT('%','${bills.goods}','%' )</if>
+		    <if test="bills.ordertime != null and ordertime != ''">and ordertime like CONCAT('%','${bills.ordertime}','%' )</if>
+		</where>	   
+	   order by id  
+	   limit #{start},#{size}
+	</select>
+	
+	<select id="selectBillslist"  parameterType="java.util.HashMap"   resultMap="billsMap"  >
+	   select orderid,goods,tel,name,date,ordertime
+	   from bills 
+	   order by id  
+	   limit #{start},#{size}
+	</select>
+	
+	<insert id="addBills" parameterType="com.adam.model.Bills">
+		insert into bills (orderid,goods,tel,name,date,ordertime )
+		 values(#{id},#{goods},#{tel},#{name},#{date},#{ordertime})
+	</insert>
+	
+	<delete id="deleteById" parameterType="String" >
+	    delete from bills where id = #{id}
+	</delete>
+	
+	 <resultMap type="Bills" id="billsMap">
+	     <id property="id" column="id" />  
+	     <result property="orderid" column="orderid"/> 
+	     <result property="goods" column="goods"/>  
+	     <result property="name" column="name"/>
+	     <result property="tel" column="tel"/>
+	     <result property="date" column="date"/>
+	     <result property="ordertime" column="ordertime"/>
+	</resultMap>
+	
+</mapper>

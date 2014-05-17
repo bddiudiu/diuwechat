@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.adam.dao.CallDao">
+	
+	<select id="selectByWx" parameterType="String"   resultMap="callMap"  >
+	   select id,content,type,state,pic,picurl 
+	   from backcontent
+	   where type = #{type}
+	</select>
+	
+	<select id="selectBytype" parameterType="String"   resultMap="callMap"  >
+	   select id,content,type,state,pic,picurl 
+	   from backcontent
+	   where type = #{type}
+	</select>    
+	
+	<select id="selectBystate" parameterType="String"   resultMap="callMap"  >
+	   select id,content,type,state,pic,picurl
+	   from backcontent
+	   where state = #{state}
+	</select> 
+	
+	<select id="selectByid" parameterType="int"   resultMap="callMap"  >
+	   select id,content,type,state,pic,picurl
+	   from backcontent
+	   where id = #{id}
+	</select>  
+	
+	<select id="selectCall"  parameterType="java.util.HashMap"   resultMap="callMap"  >
+	   select id,content,type,state,pic,picurl
+	   from backcontent 
+		<where>
+		    <if test="call.state != null and call.state != ''">state = #{call.state}</if>
+		    <if test="call.type != null and call.type != ''">and type like CONCAT('%','${call.type}','%' )</if>
+		    <if test="call.content != null and call.content != ''">and content like CONCAT('%','${call.content}','%' )</if>
+		    <if test="call.pic != null and call.pic != ''">and name like CONCAT('%','${call.pic}','%' )</if>
+		    <if test="call.picurl != null and call.picurl != ''">and name like CONCAT('%','${call.picurl}','%' )</if>
+		</where>	   
+	   order by id  
+	   limit #{start},#{size}
+	</select>
+	
+	<update id="updateCall"  parameterType="com.adam.model.Call">
+	    update backcontent 
+	    set content=#{content},type=#{type},state=#{state},pic=#{pic},picurl=#{picurl}
+	    where id = #{id}
+	</update>
+	
+	<update id="updateCallByType"  parameterType="com.adam.model.Call">
+	    update backcontent
+	    set state= '0'
+	    where type=#{type} 
+	</update>
+	
+	<insert id="addCall" parameterType="com.adam.model.Call">
+		insert into backcontent (content,type,state,pic,picurl)
+		 values(#{content},#{type},#{state},#{pic},#{picurl})
+	</insert>
+	
+	<delete id="deleteById" parameterType="int" >
+	    delete from backcontent where id = #{id}
+	</delete>
+	
+	 <resultMap type="Call" id="callMap">
+	     <id property="id" column="id" />  
+	     <result property="content" column="content"/>  
+	     <result property="state" column="state"/>
+	     <result property="type" column="type"/>
+	     <result property="pic" column="pic"/>
+	     <result property="picurl" column="picurl"/>
+	</resultMap>
+	
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.adam.dao.LogDao">
+	
+    
+	<insert id="addLog" parameterType="com.adam.model.Log"> 
+	    insert into log(id,name,content,time) 
+	    values (#{id},#{name},#{content},#{time}) 
+	</insert>
+
+
+	<select id="getList"  parameterType="int" resultMap="LogMap">
+	   select id,name,content,time 
+	   from log
+	   order by time desc 
+	   limit #{start},#{size}
+	</select>
+	
+	
+	<resultMap type="Log" id="logMap">
+	     <id property="id" column="id" />  
+	     <result property="name" column="name"/>  
+	     <result property="content" column="content"/>
+	     <result property="time" column="time"/>
+	</resultMap>
+	
+</mapper>
