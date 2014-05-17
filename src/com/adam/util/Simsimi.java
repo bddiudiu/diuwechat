@@ -18,7 +18,7 @@ public class Simsimi {
 
 	private static String api = "http://sandbox.api.simsimi.com/request.p?ft=1.0";
 	private static String lc= "ch";
-	private static String ak = "a8d8112e-5e44-40fb-a0d4-91404c5307fc";
+	private static String ak = "";
 	
 	public static String getURL(String str){
 		try {

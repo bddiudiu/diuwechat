@@ -16,10 +16,10 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 public class AiBangUtil {
 
 	private static String api = "http://openapi.aibang.com/bus/lines?";
-	private static String key = "ff82a1b9e6d298be982a9bd7a9f00303";
-	private static String sn = "66763749758cc549";
+	private static String key = "";
+	private static String sn = "";
 	
-	//http://openapi.aibang.com/bus/lines?app_key=f41c8afccc586de03a99c86097e98ccb&city=%E5%8D%97%E9%80%9A&q=8
+	
 	
 	public static String getURL(String str,String zd){
 		try {

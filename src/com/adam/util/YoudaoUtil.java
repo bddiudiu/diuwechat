@@ -25,8 +25,8 @@ import org.dom4j.io.SAXReader;
 public class YoudaoUtil {
 
 	private static String url = "http://fanyi.youdao.com/openapi.do";
-	private static String keyfrom = "bddiudiu";
-	private static String key = "516245698";
+	private static String keyfrom = "";
+	private static String key = "";
 	private static String doctype = "xml";
 
 	private static String sendGet(String str) {

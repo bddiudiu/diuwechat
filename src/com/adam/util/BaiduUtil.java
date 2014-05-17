@@ -35,7 +35,7 @@ public class BaiduUtil {
 	Logger logger = Logger.getLogger(BaiduUtil.class);
 	private static String api = "http://api.map.baidu.com/telematics/v3/";
 	private static String output = "json";
-	private static String ak = "2j2sGGn9w5WaOLCZbSzzyw9z";
+	private static String ak = "";
 	
 	
 	public static String getURL(String str,String method){
